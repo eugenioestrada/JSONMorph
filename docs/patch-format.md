@@ -34,6 +34,12 @@ The empty path (`""`) or root (`"/"`) refers to the root document.
 
 ### Replace
 
+| Member | Attribute | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| `op` | Operation | string | Must be "rp" to indicate a replace operation. |
+| `p` | Path | string | JSON Pointer path to the value to replace. |
+| `v` | Value | any | Replacement value serialized as JSON. |
+
 ```json
 {
   "op": "rp",
@@ -43,6 +49,12 @@ The empty path (`""`) or root (`"/"`) refers to the root document.
 ```
 
 ### Add
+
+| Member | Attribute | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| `op` | Operation | string | Must be "a" to indicate an add operation. |
+| `p` | Path | string | JSON Pointer path where the value should be added. |
+| `v` | Value | any | Value to insert. Arrays append when `p` refers to the array itself. |
 
 ```json
 {
@@ -59,6 +71,11 @@ If the path points to an existing property containing an array, the value is app
 
 ### Remove
 
+| Member | Attribute | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| `op` | Operation | string | Must be "rm" to indicate a remove operation. |
+| `p` | Path | string | JSON Pointer path to the value that will be removed. Root paths are not allowed. |
+
 ```json
 {
   "op": "rm",
@@ -67,6 +84,14 @@ If the path points to an existing property containing an array, the value is app
 ```
 
 ### Text Diff
+
+| Member | Attribute | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| `op` | Operation | string | Must be "td" to indicate a text diff. |
+| `p` | Path | string | JSON Pointer path to the string that will be edited. |
+| `v.s` | Value start | number | Start index (zero-based characters) where the change begins. |
+| `v.dl` | Value delete length | number | Number of characters to delete. |
+| `v.it` | Value insert text | string | Text to insert at the specified location. |
 
 ```json
 {
@@ -97,6 +122,12 @@ Violations throw `InvalidOperationException` while parsing or applying operation
 
 ## Move
 
+| Member | Attribute | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| `op` | Operation | string | Must be "mv" to indicate a move. |
+| `p` | Path | string | Destination JSON Pointer path. |
+| `f` | From | string | Source JSON Pointer path. |
+
 ```json
 {
   "op": "mv",
@@ -109,6 +140,12 @@ Move transfers the value located at pointer `f` to pointer `p` without cloning. 
 
 ## Copy
 
+| Member | Attribute | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| `op` | Operation | string | Must be "cp" to indicate a copy. |
+| `p` | Path | string | Destination JSON Pointer path. |
+| `f` | From | string | Source JSON Pointer path to clone. |
+
 ```json
 {
   "op": "cp",
@@ -120,6 +157,12 @@ Move transfers the value located at pointer `f` to pointer `p` without cloning. 
 Copy clones the value located at pointer `f` and inserts the clone at pointer `p`. The source value remains intact.
 
 ## List Diff
+
+| Member | Attribute | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| `op` | Operation | string | Must be "ld" to indicate a list diff. |
+| `p` | Path | string | JSON Pointer path to the target array. |
+| `v.m` | Value moves | array | Collection of move objects, each with `f` (from index) and `t` (to index). |
 
 ```json
 {
