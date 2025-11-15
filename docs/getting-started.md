@@ -51,6 +51,34 @@ string result = JsonMorph.ApplyPatch(original, patch);
 
 `result` now matches the `modified` document. Any failure to parse JSON or invalid patch input produces an exception. Wrap calls in `try`/`catch` when working with untrusted payloads.
 
+## Apply Multiple Patches
+
+When replaying a change log, use `ApplyPatches`. Patches are applied in the order they are provided.
+
+```csharp
+string replayed = JsonMorph.ApplyPatches(original, patchA, patchB, patchC);
+```
+
+If your patches live in a list or database cursor, pass the sequence directly:
+
+```csharp
+IEnumerable<string> history = LoadPatchHistory();
+string replayed = JsonMorph.ApplyPatches(original, history);
+```
+
+### Rebuild an Article from Stored Patches
+
+Persist the first full JSON document for an article together with every patch that was produced afterwards (oldest first). To restore the latest version, deserialize the original snapshot and feed the stored patch list to `ApplyPatches`:
+
+```csharp
+string firstSnapshot = LoadOriginalArticleJson();
+IEnumerable<string> patches = LoadStoredPatches(); // ensure patches are ordered oldest → newest
+
+string latest = JsonMorph.ApplyPatches(firstSnapshot, patches);
+```
+
+The returned JSON matches the most recent article state. This approach also lets you rehydrate intermediate revisions by applying only the first N patches from the history.
+
 ## Tips
 - Serialize complex objects with `System.Text.Json` before passing them to JSONMorph.
 - When generating patches on the server and applying them on clients, validate version numbers or ETags to avoid conflicts.

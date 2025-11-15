@@ -51,6 +51,10 @@ string updated = """
 string patch = JsonMorph.GeneratePatch(original, updated);
 string patched = JsonMorph.ApplyPatch(original, patch);
 
+// patchA, patchB, patchC are JSON patch strings captured earlier
+// Apply multiple patches in sequence when replaying a change log
+string replayed = JsonMorph.ApplyPatches(original, patchA, patchB, patchC);
+
 Console.WriteLine(patch);
 ```
 
@@ -76,6 +80,7 @@ Paths follow the [JSON Pointer](https://www.rfc-editor.org/rfc/rfc6901) syntax. 
 
 - `GeneratePatch` returns an indented JSON array representing the operations needed to transform the original document into the modified document.
 - `ApplyPatch` consumes the patch array and returns a formatted JSON string containing the patched document.
+- `ApplyPatches` consumes an ordered collection of patch arrays and replays each one against the evolving document, making it easy to apply change logs without manual loops.
 - Text diff operations (`td`) only target string values. The payload uses compact keys (`s`, `dl`, `it`) and follows this structure:
 
   ```json

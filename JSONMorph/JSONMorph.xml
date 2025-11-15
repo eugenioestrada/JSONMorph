@@ -26,6 +26,27 @@
             <exception cref="T:System.ArgumentException">Thrown when the JSON payload or patch cannot be parsed.</exception>
             <exception cref="T:System.InvalidOperationException">Thrown when the patch contains unsupported or invalid operations.</exception>
         </member>
+        <member name="M:JSONMorph.JsonMorph.ApplyPatches(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Applies a sequence of JSON patch documents to a JSON payload and returns the transformed JSON.
+            </summary>
+            <param name="jsonDocument">The JSON document that will receive the patches.</param>
+            <param name="jsonPatches">The ordered collection of JSON patches to apply. Each entry must be a JSON array containing operations.</param>
+            <returns>The patched JSON document serialized with indented formatting.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="jsonDocument"/> or <paramref name="jsonPatches"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the sequence contains a <see langword="null"/> patch.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when any patch contains unsupported or invalid operations.</exception>
+        </member>
+        <member name="M:JSONMorph.JsonMorph.ApplyPatches(System.String,System.String[])">
+            <summary>
+            Applies a sequence of JSON patch documents to a JSON payload and returns the transformed JSON.
+            </summary>
+            <param name="jsonDocument">The JSON document that will receive the patches.</param>
+            <param name="jsonPatches">The ordered collection of JSON patches to apply. Each entry must be a JSON array containing operations.</param>
+            <returns>The patched JSON document serialized with indented formatting.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="jsonPatches"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when any patch contains unsupported or invalid operations.</exception>
+        </member>
         <member name="M:JSONMorph.JsonMorph.GeneratePatch(System.String,System.String)">
             <summary>
             Generates a JSON patch that transforms one JSON document into another. String differences are encoded using text diff operations.

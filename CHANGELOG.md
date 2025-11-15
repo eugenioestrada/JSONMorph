@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-11-15
+- Added `JsonMorph.ApplyPatches` overloads to replay multiple patches sequentially with a single call.
+- Updated README and getting-started guide with multi-patch usage examples.
+- Extended unit tests to cover the new API, including validation for null entries and empty sequences.
+
 ## [1.1.0] - 2025-11-14
 - Added text diff (`td`) operation for string properties to reduce patch size when generating patches.
 - Updated documentation and README guidance to describe the new operation payload.

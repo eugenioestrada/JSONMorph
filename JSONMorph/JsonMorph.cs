@@ -67,18 +67,60 @@ public static class JsonMorph
     /// <exception cref="InvalidOperationException">Thrown when the patch contains unsupported or invalid operations.</exception>
     public static string ApplyPatch(string jsonDocument, string jsonPatch)
     {
-        ArgumentNullException.ThrowIfNull(jsonDocument);
         ArgumentNullException.ThrowIfNull(jsonPatch);
+        return ApplyPatches(jsonDocument, new[] { jsonPatch });
+    }
+
+    /// <summary>
+    /// Applies a sequence of JSON patch documents to a JSON payload and returns the transformed JSON.
+    /// </summary>
+    /// <param name="jsonDocument">The JSON document that will receive the patches.</param>
+    /// <param name="jsonPatches">The ordered collection of JSON patches to apply. Each entry must be a JSON array containing operations.</param>
+    /// <returns>The patched JSON document serialized with indented formatting.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="jsonDocument"/> or <paramref name="jsonPatches"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Thrown when the sequence contains a <see langword="null"/> patch.</exception>
+    /// <exception cref="InvalidOperationException">Thrown when any patch contains unsupported or invalid operations.</exception>
+    public static string ApplyPatches(string jsonDocument, IEnumerable<string> jsonPatches)
+    {
+        ArgumentNullException.ThrowIfNull(jsonDocument);
+        ArgumentNullException.ThrowIfNull(jsonPatches);
 
         JsonNode root = ParseJsonNode(jsonDocument, nameof(jsonDocument));
-        JsonArray operationsArray = ParsePatchArray(jsonPatch);
 
+        foreach (string jsonPatch in jsonPatches)
+        {
+            if (jsonPatch is null)
+            {
+                throw new ArgumentException("Patch sequence cannot contain null entries.", nameof(jsonPatches));
+            }
+
+            JsonArray operationsArray = ParsePatchArray(jsonPatch);
+            ApplyPatchOperations(ref root, operationsArray);
+        }
+
+        return root.ToJsonString(SerializerOptions);
+    }
+
+    /// <summary>
+    /// Applies a sequence of JSON patch documents to a JSON payload and returns the transformed JSON.
+    /// </summary>
+    /// <param name="jsonDocument">The JSON document that will receive the patches.</param>
+    /// <param name="jsonPatches">The ordered collection of JSON patches to apply. Each entry must be a JSON array containing operations.</param>
+    /// <returns>The patched JSON document serialized with indented formatting.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="jsonPatches"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">Thrown when any patch contains unsupported or invalid operations.</exception>
+    public static string ApplyPatches(string jsonDocument, params string[] jsonPatches)
+    {
+        ArgumentNullException.ThrowIfNull(jsonPatches);
+        return ApplyPatches(jsonDocument, (IEnumerable<string>)jsonPatches);
+    }
+
+    private static void ApplyPatchOperations(ref JsonNode root, JsonArray operationsArray)
+    {
         foreach (PatchOperation operation in ToPatchOperations(operationsArray))
         {
             ApplyOperation(ref root, operation);
         }
-
-        return root.ToJsonString(SerializerOptions);
     }
 
     /// <summary>

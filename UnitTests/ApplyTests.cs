@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using JSONMorph;
 
@@ -989,5 +990,125 @@ public sealed class ApplyTests
         {
             CultureInfo.CurrentCulture = originalCulture;
         }
+    }
+
+    [TestMethod]
+    public void ApplyPatchesParamsSequenceAppliesInOrder()
+    {
+        string originalJson = """
+        {
+          "status": "draft"
+        }
+        """;
+        string addConfigPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/metadata",
+            "v": {
+              "mode": "basic"
+            }
+          }
+        ]
+        """;
+        string updateModePatch = """
+        [
+          {
+            "op": "rp",
+            "p": "/metadata/mode",
+            "v": "advanced"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "status": "draft",
+          "metadata": {
+            "mode": "advanced"
+          }
+        }
+        """;
+
+        string result = JsonMorph.ApplyPatches(originalJson, addConfigPatch, updateModePatch);
+
+        Assert.AreEqual(expectedJson, result);
+    }
+
+    [TestMethod]
+    public void ApplyPatchesEnumerableAppliesInOrder()
+    {
+        string originalJson = """
+        {
+          "counter": 0,
+          "history": []
+        }
+        """;
+        string incrementPatch = """
+        [
+          {
+            "op": "rp",
+            "p": "/counter",
+            "v": 1
+          },
+          {
+            "op": "a",
+            "p": "/history",
+            "v": "initialized"
+          }
+        ]
+        """;
+        string snapshotPatch = """
+        [
+          {
+            "op": "rp",
+            "p": "/counter",
+            "v": 2
+          },
+          {
+            "op": "a",
+            "p": "/history",
+            "v": "patched"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "counter": 2,
+          "history": [
+            "initialized",
+            "patched"
+          ]
+        }
+        """;
+
+        string result = JsonMorph.ApplyPatches(originalJson, new List<string> { incrementPatch, snapshotPatch });
+
+        Assert.AreEqual(expectedJson, result);
+    }
+
+    [TestMethod]
+    public void ApplyPatchesNullEntryThrowsArgumentException()
+    {
+        string originalJson = """
+        {
+          "value": 1
+        }
+        """;
+
+        AssertThrows<ArgumentException>(() => JsonMorph.ApplyPatches(originalJson, new string[] { null! }), "Patch sequence cannot contain null entries.");
+    }
+
+    [TestMethod]
+    public void ApplyPatchesWithNoPatchesReturnsFormattedDocument()
+    {
+        string originalJson = """
+        {
+          "value": 1
+        }
+        """;
+
+        string result = JsonMorph.ApplyPatches(originalJson, Array.Empty<string>());
+
+        Assert.AreEqual(originalJson, result);
     }
 }
