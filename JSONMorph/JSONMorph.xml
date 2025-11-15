@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JSONMorph</name>
+    </assembly>
+    <members>
+        <member name="T:JSONMorph.JsonMorph">
+            <summary>
+            Provides helpers for generating and applying JSONMorph patches using the library's compact operation codes.
+            </summary>
+            <remarks>
+            The supported operations are add (<c>a</c>), remove (<c>rm</c>), replace (<c>rp</c>), and text diff (<c>td</c>). Text diff
+            operations target string values and encode start index, delete length, and replacement text instead of replacing the
+            entire value. The API parses and emits JSON text using <see cref="T:System.Text.Json.Nodes.JsonNode"/> semantics so formatting is preserved only
+            where possible. All JSON parsing and serialization uses invariant culture formatting to keep patches stable across environments.
+            </remarks>
+        </member>
+        <member name="M:JSONMorph.JsonMorph.ApplyPatch(System.String,System.String)">
+            <summary>
+            Applies a JSON patch document to a JSON payload and returns the transformed JSON.
+            </summary>
+            <param name="jsonDocument">The JSON document that will receive the patch.</param>
+            <param name="jsonPatch">The JSON patch to apply. The document must be an array of operations encoded with <c>op</c>, <c>path</c>, and optional <c>value</c> members. Text diff (<c>td</c>) operations expect an object payload with <c>start</c>, <c>deleteLength</c>, and <c>insertText</c>.</param>
+            <returns>The patched JSON document serialized with indented formatting.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="jsonDocument"/> or <paramref name="jsonPatch"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the JSON payload or patch cannot be parsed.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when the patch contains unsupported or invalid operations.</exception>
+        </member>
+        <member name="M:JSONMorph.JsonMorph.GeneratePatch(System.String,System.String)">
+            <summary>
+            Generates a JSON patch that transforms one JSON document into another. String differences are encoded using text diff operations.
+            </summary>
+            <param name="originalJson">The baseline JSON document.</param>
+            <param name="modifiedJson">The updated JSON document to compare against the baseline.</param>
+            <returns>A JSON patch array containing the minimal set of operations required to reach the modified document.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="originalJson"/> or <paramref name="modifiedJson"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when either JSON document cannot be parsed.</exception>
+        </member>
+    </members>
+</doc>
