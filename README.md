@@ -101,13 +101,11 @@ Consumers integrating with RFC 6902 endpoints should continue to use the standar
 ```mermaid
 flowchart LR
     A[JSON Input] -->|Parse with System.Text.Json| B((JsonNode Tree))
-    B --> C{Generate?
-    }
-    C -->|Yes| D[CollectDifferences]
-    D --> E[Emit Operations
-  rp / a / rm / td / mv / cp / ld]
+    B --> C{Generate?}
+    C -->|Yes| D[Collect Differences]
+    D --> E[Emit Operations<br/>rp / a / rm / td / mv / cp / ld]
     E --> F[Patch JSON Array]
-    C -->|No (Apply)| G[Iterate Operations]
+    C -->|No| G[Iterate Operations]
     G --> H{Operation Type}
     H -->|rp| I[Replace]
     H -->|a| J[Add]
