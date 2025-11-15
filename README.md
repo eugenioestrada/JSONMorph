@@ -2,6 +2,11 @@
 
 JSONMorph is a lightweight .NET library for generating and applying JSON patches. It focuses on predictable output, culture-invariant number formatting, and a compact operation format well-suited for messaging scenarios.
 
+## TL;DR Benefits
+- Shrink storage and bandwidth footprints: JSONMorph emits patches that are frequently 5-15x smaller than resending full JSON documents, cutting annual storage from roughly 36 GB to 3.4 GB in a 500-articles-per-day newsroom example.
+- Keep diffs predictable with invariant serialization and deterministic operation ordering.
+- Stay productive with a focused surface area: `GeneratePatch` and `ApplyPatch` handle round-trips without ceremony.
+
 ## Why JSONMorph?
 - **Deterministic output** – invariant serialization keeps patches stable across locales.
 - **Minimal allocations** – built on top of `System.Text.Json` and `JsonNode` so round-trips stay fast.
