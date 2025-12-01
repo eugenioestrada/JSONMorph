@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
+using System.Text.Json.Nodes;
 using JSONMorph;
 
 namespace UnitTests;
@@ -51,7 +50,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -85,7 +89,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -120,7 +129,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -148,7 +162,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -195,7 +214,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -229,7 +253,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -264,7 +293,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -302,7 +336,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -342,7 +381,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -388,7 +432,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -422,7 +471,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -458,7 +512,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -491,7 +550,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -540,7 +604,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -585,7 +654,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -629,7 +703,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -661,7 +740,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -685,7 +769,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -718,7 +807,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -750,7 +844,12 @@ public sealed class ApplyTests
 
         string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-        Assert.AreEqual(expectedJson, resultJson);
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
     }
 
     [TestMethod]
@@ -984,7 +1083,7 @@ public sealed class ApplyTests
 
             string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
 
-            Assert.AreEqual(expectedJson, resultJson);
+            AssertJsonEquivalent(expectedJson, resultJson);
         }
         finally
         {
@@ -1110,5 +1209,621 @@ public sealed class ApplyTests
         string result = JsonMorph.ApplyPatches(originalJson, Array.Empty<string>());
 
         Assert.AreEqual(originalJson, result);
+    }
+
+    [TestMethod]
+    public void ApplyAddNewTaxonomyTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/Person",
+            "v": [
+              "persona1",
+              "persona2"
+            ]
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Person": [
+            "persona1",
+            "persona2"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyAddSlugToExistingTaxonomyTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/Section",
+            "v": "slug4"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3",
+            "slug4"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyRemoveSlugFromTaxonomyTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "rm",
+            "p": "/Section/1"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyReplaceSlugInTaxonomyTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "rp",
+            "p": "/Tag/1",
+            "v": "new-slug"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "new-slug",
+            "slug3"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyClearTaxonomyTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "rp",
+            "p": "/Section",
+            "v": []
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyAddSlugToEmptyTaxonomyTest()
+    {
+        string originalJson = """
+        {
+          "Section": [],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/Section",
+            "v": "first-slug"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "first-slug"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyRemoveEntireTaxonomyTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "rm",
+            "p": "/Tag"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyMultipleTaxonomyOperationsTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/Section",
+            "v": "slug4"
+          },
+          {
+            "op": "rm",
+            "p": "/Tag/0"
+          },
+          {
+            "op": "a",
+            "p": "/Person",
+            "v": [
+              "persona1",
+              "persona2"
+            ]
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3",
+            "slug4"
+          ],
+          "Tag": [
+            "slug2",
+            "slug3"
+          ],
+          "Person": [
+            "persona1",
+            "persona2"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyReplaceMultipleSlugsTest()
+    {
+        string originalJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "rp",
+            "p": "/Section/0",
+            "v": "new-slug1"
+          },
+          {
+            "op": "rp",
+            "p": "/Section/2",
+            "v": "new-slug3"
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "new-slug1",
+            "slug2",
+            "new-slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyAddFirstTaxonomyToEmptyObjectTest()
+    {
+        string originalJson = """
+        {
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/Section",
+            "v": [
+              "slug1",
+              "slug2"
+            ]
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyBuildCompleteTaxonomyFromEmptyObjectTest()
+    {
+        string originalJson = """
+        {
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/Section",
+            "v": [
+              "slug1",
+              "slug2",
+              "slug3"
+            ]
+          },
+          {
+            "op": "a",
+            "p": "/Tag",
+            "v": [
+              "slug1",
+              "slug2",
+              "slug3"
+            ]
+          },
+          {
+            "op": "a",
+            "p": "/Person",
+            "v": [
+              "persona1",
+              "persona2"
+            ]
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Tag": [
+            "slug1",
+            "slug2",
+            "slug3"
+          ],
+          "Person": [
+            "persona1",
+            "persona2"
+          ]
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    [TestMethod]
+    public void ApplyAddEmptyTaxonomyToEmptyObjectTest()
+    {
+        string originalJson = """
+        {
+        }
+        """;
+        string jsonPatch = """
+        [
+          {
+            "op": "a",
+            "p": "/Section",
+            "v": []
+          }
+        ]
+        """;
+        string expectedJson = """
+        {
+          "Section": []
+        }
+        """;
+
+        string resultJson = JsonMorph.ApplyPatch(originalJson, jsonPatch);
+
+        AssertJsonEquivalent(expectedJson, resultJson);
+
+        // Verify reversibility
+        string reversePatch = JsonMorph.GeneratePatch(resultJson, originalJson);
+        string revertedJson = JsonMorph.ApplyPatch(resultJson, reversePatch);
+        AssertJsonEquivalent(originalJson, revertedJson);
+    }
+
+    private static void AssertJsonEquivalent(string expectedJson, string actualJson)
+    {
+        JsonNode? expectedNode = JsonNode.Parse(expectedJson);
+        JsonNode? actualNode = JsonNode.Parse(actualJson);
+
+        Assert.IsNotNull(expectedNode, "Expected JSON could not be parsed.");
+        Assert.IsNotNull(actualNode, "Actual JSON could not be parsed.");
+        Assert.IsTrue(JsonNode.DeepEquals(expectedNode, actualNode), "JSON documents differ.");
     }
 }
