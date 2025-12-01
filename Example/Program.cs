@@ -27,7 +27,7 @@ Console.WriteLine(patchedTerms1);
 
 string patch2 = JsonMorph.GeneratePatch(patchedTerms1, """
 {
-    "Section": [ "slug1", "slug2" ]
+    "Section": [ "slug2" ]
 }
 """);
 
